@@ -139,7 +139,7 @@ for subject in unique_subjects:
                        "Total Number of Missing Miso Sounds (i.e. # Audio Files Repeated to bring total to 10): "
                        + str(numRepeats) + "\n\n" + 
                        "Audio Files that were repeated: " + str(dup_set))
-        print(f"File saved to {csv_file_path_warning}")
+        #print(f"File saved to {csv_file_path_warning}")
         csv_paths.append(csv_file_path_warning)
 
         # Add duplicates to the existing sounds to create the final sounds (with repeats)
@@ -161,4 +161,6 @@ for subject in unique_subjects:
     csv_paths.append(csv_file_path_10Miso)
     csv_paths.append(csv_file_path_10NonMiso)
     csv_paths.append(csv_file_path_sound_rating)
+
+    print(csv_paths)
 
