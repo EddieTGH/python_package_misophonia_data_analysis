@@ -70,11 +70,54 @@ df_final = df_final.drop(columns=['Memory'])
 df_final['Rating'] = df_final['Rating'].abs()
 
 
-print(df_final[df_final['Subject'] == subjN].sort_values(by=['Trigger']).reset_index(drop=True))
+#print(df_final[df_final['Subject'] == subjN].sort_values(by=['Trigger']).reset_index(drop=True))
+
 
 
 sound_rating = df_final[ (df_final['Subject'] == subjN) ]
-sound_rating = sound_rating[['Name', 'Rating']].reset_index(drop=True)
+sound_rating = sound_rating[['Name', 'Trigger', 'Rating']].reset_index(drop=True)
+
+
+
+#Create Ranking
+
+# Group by 'Trigger', rank each group, and map the rankings back to the original DataFrame.
+sound_rating['Ranking'] = sound_rating.groupby('Trigger')['Rating'].rank(ascending=True, method='first').astype(int)
+
+# Now sort by 'Trigger' and then by 'Ranking' within each group to see the results.
+sound_rating.sort_values(by=['Trigger', 'Ranking'], inplace=True)
+
+
+
+#Create Order Label
+dictionary = {1: "A",
+              2: "B",
+              3: "C",
+              4: "D",
+              5: "E",
+              6: "F",
+              7: "G",
+              8: "H",
+              9: "I",
+              10: "J" }
+
+dictionary2 = {"A": 1,
+               "B": 5,
+               "C": 2,
+               "D": 6,
+               "E": 3,
+               "F": 9,
+               "G": 7,
+               "H": 4,
+               "I": 10,
+               "J": 8}
+
+sound_rating['Alpha'] = sound_rating['Ranking'].map(dictionary)
+sound_rating['Order_Label'] = sound_rating['Alpha'].map(dictionary2)
+
+column_to_remove = ['Alpha']
+sound_rating = sound_rating.drop(columns=column_to_remove)
+print(sound_rating)
 
 
 

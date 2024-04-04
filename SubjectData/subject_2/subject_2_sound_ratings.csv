@@ -1,6 +1,6 @@
-a_AlarmClock_s.wav,9
-a_AngryBeast_s.wav,8
-a_BabiesCrying_s.wav,7
-a_CarsHonking_s.wav,9
-a_ChildScreaming_s.wav,8
-a_CryingMan_s.wav,7
+a_AlarmClock_s.wav,No,9,1,1
+a_AngryBeast_s.wav,No,8,2,5
+a_BabiesCrying_s.wav,No,7,3,2
+a_CarsHonking_s.wav,Yes,9,1,1
+a_ChildScreaming_s.wav,Yes,8,2,5
+a_CryingMan_s.wav,Yes,7,3,2
