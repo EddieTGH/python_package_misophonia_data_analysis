@@ -12,7 +12,7 @@ mapping.columns = ['Name', 'Sound']
 
 
 # Creating the DataFrame
-df = pd.read_csv("miso raw data 2.csv")
+df = pd.read_csv("miso raw data 3.csv")
 
 #remove uneccessary columns
 columns_list = df.columns.tolist()
@@ -192,7 +192,7 @@ for subject in unique_subjects:
     
     # Define file path
     csv_file_path_10Miso = os.path.join(subdirectory_name, f'subject_{subject}_Miso_sound.csv')
-    csv_file_path_10NonMiso = os.path.join(subdirectory_name, f'subject_{subject}_NonMiso_sound.csv')
+    csv_file_path_10NonMiso = os.path.join(subdirectory_name, f'subject_{subject}_Aversive_sound.csv')
     csv_file_path_sound_rating = os.path.join(subdirectory_name, f'subject_{subject}_sound_ratings.csv')
     
     # Save the Sound column to CSV

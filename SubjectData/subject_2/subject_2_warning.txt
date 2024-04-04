@@ -2,4 +2,4 @@ WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS MISOPHONIC.
 
 Total Number of Missing Miso Sounds (i.e. # Audio Files Repeated to bring total to 10): 7
 
-Audio Files that were repeated: {'a_CarsHonking_s.wav', 'a_ChildScreaming_s.wav'}
+Audio Files that were repeated: {'a_CarsHonking_s.wav', 'a_CryingMan_s.wav', 'a_ChildScreaming_s.wav'}
