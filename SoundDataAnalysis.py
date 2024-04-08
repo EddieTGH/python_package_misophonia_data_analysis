@@ -4,6 +4,7 @@ import random
 
 
 subjN = int(input("Enter Subject Number: "))
+#df_path = input("Enter Qualtrics CSV file path without quotes (i.e. 'raw_data.csv'): ")
 
 
 mapping = pd.read_csv("Misophonia Mapping Sounds.csv")
@@ -12,7 +13,8 @@ mapping.columns = ['Name', 'Sound']
 
 
 # Creating the DataFrame
-df = pd.read_csv("miso raw data 3.csv")
+#df = pd.read_csv(df_path)
+df = pd.read_csv("Miso Raw Data 3.csv")
 
 #remove uneccessary columns
 columns_list = df.columns.tolist()
@@ -106,11 +108,11 @@ dictionary2 = {"A": 1,
                "C": 2,
                "D": 6,
                "E": 3,
-               "F": 9,
-               "G": 7,
+               "F": 7,
+               "G": 9,
                "H": 4,
-               "I": 10,
-               "J": 8}
+               "I": 8,
+               "J": 10}
 
 sound_rating['Alpha'] = sound_rating['Ranking'].map(dictionary)
 sound_rating['Order_Label'] = sound_rating['Alpha'].map(dictionary2)
