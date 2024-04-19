@@ -1,0 +1,21 @@
+Name,Rating,Trigger,Ranking,Order_Label
+a_FireTruckAlarm_s.wav,2,No,1,1
+a_ChildScreaming_s.wav,3,No,2,3
+a_GhostWhispers_s.wav,3,No,3,5
+a_WomanWailing_s.wav,3,No,4,8
+Personalized 6,5,No,5,2
+a_ToddlerCrying_s_rev.wav,6,No,6,4
+a_CryingMan_s.wav,9,No,7,6
+a_DV_s.wav,9,No,8,9
+a_Fart_s.wav,9,No,9,7
+m_iads_Whistling_270_s.wav,9,No,10,10
+m_Snoring_s.wav,8,Yes,1,1
+m_Typing_s.wav,8,Yes,2,3
+m_iads_ManWheeze_244_s.wav,8,Yes,3,5
+m_SnoringD_s.wav,8,Yes,4,8
+a_AlarmClock_s.wav,9,Yes,5,2
+m_DrinkingWater3_s.wav,9,Yes,6,4
+a_BabiesCrying_s.wav,9,Yes,7,6
+a_CarsHonking_s.wav,9,Yes,8,9
+m_CatTunaLicking_s.wav,9,Yes,9,7
+a_FemaleScream_s.wav,9,Yes,10,10

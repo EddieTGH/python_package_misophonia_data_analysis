@@ -1,0 +1,21 @@
+Name,Rating,Trigger,Ranking,Order_Label
+m_DogBarking_s.wav,9,No,1,1
+m_ChewingFoodWithMouthOpen_s.wav,9,No,2,3
+m_PenClicking_s.wav,9,No,3,5
+m_iads_Whistling_270_s.wav,9,No,4,8
+m_SlurpingNoodles_s.wav,9,No,5,2
+m_Sniffing_s.wav,9,No,6,4
+m_Hiccup_s.wav,9,No,7,6
+m_GumChewing2_s.wav,9,No,8,9
+m_FingerTapping_s.wav,9,No,9,7
+Personalized 3,9,No,10,10
+Personalized 2,9,Yes,1,1
+m_Sneeze_s.wav,9,Yes,2,3
+m_DrinkingWater3_s.wav,9,Yes,3,5
+m_HeavyBreathing_s.wav,9,Yes,4,8
+Personalized 5,9,Yes,5,2
+m_Keyboard_s.wav,9,Yes,6,4
+m_LipsSmacking_s.wav,9,Yes,7,6
+m_RunnyNose_s.wav,9,Yes,8,9
+m_SneezeReady_s.wav,9,Yes,9,7
+m_Sneezing_s.wav,9,Yes,10,10

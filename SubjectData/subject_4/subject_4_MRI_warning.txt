@@ -1,0 +1,12 @@
+WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS AVERSIVE.
+
+Total Number of Classified Misophonic Sounds: 6
+
+Total Number of Missing Aversive Sounds: 4
+
+Repeated Aversive Sounds: {'a_WomanWailing_s.wav', 'm_Whistling_s.wav', 'm_ThroatClearing5_s.wav', 'a_PuppyCrying_s.wav'}
+
+Added Positive/Neutral Low Arousal 'Aversive' (a_) Sounds: None
+
+Total Number of Repeated/Added Misophonic Sounds: 4
+

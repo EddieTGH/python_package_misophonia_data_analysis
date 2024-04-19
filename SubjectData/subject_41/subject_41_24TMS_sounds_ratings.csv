@@ -1,0 +1,25 @@
+Subject,Category,Name,Trigger,Rating
+41,0,n_Faucet Sound_s.wav,Yes,1
+41,0,m_WaterPouring_s.wav,Yes,1
+41,0,m_WalkingInHeels_s.wav,Yes,1
+41,0,m_CutlerySounds_s.wav,Yes,2
+41,0,m_CrunchingChips_s.wav,Yes,2
+41,0,m_CoughingAndSniffing_s.wav,Yes,2
+41,1,m_GumChewing_s.wav,Yes,5
+41,1,m_EatingSmallCrunches_s.wav,Yes,3
+41,1,m_FemalePanting_s.wav,Yes,3
+41,1,m_Whistling_s.wav,Yes,6
+41,1,m_ThroatClearing5_s.wav,Yes,3
+41,1,m_AppleEating_s.wav,Yes,3
+41,2,a_AlarmClock_s.wav,Yes,9
+41,2,a_BabiesCrying_s.wav,Yes,9
+41,2,a_CarsHonking_s.wav,Yes,9
+41,2,a_FemaleScream_s.wav,Yes,9
+41,2,m_DrinkingWater3_s.wav,Yes,9
+41,2,m_CatTunaLicking_s.wav,Yes,9
+41,3,Personalized 1,,
+41,3,Personalized 2,Yes,-4
+41,3,Personalized 3,Yes,-6
+41,3,Personalized 4,Yes,-8
+41,3,Personalized 5,No,-1
+41,3,Personalized 6,No,-5

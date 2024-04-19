@@ -1,0 +1,27 @@
+WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS MISOPHONIC.
+
+Total Number of Classified Misophonic Sounds: 2
+
+Total Number of Missing Misophonic Sounds: 8
+
+Repeated Misophonic Sounds: None
+
+Added Non-Trigger High Arousal 'Misophonic' (m_) Sounds: {'m_IADS_FemaleCough_242_s.wav', 'm_ALotOfYawning_s.wav', 'm_IADS_Vomit_255_s.wav', 'm_IADS_MaleSnore_252_s.wav', 'm_HotTeaSlurping_s.wav', 'm_iads_Hiccup_245_s.wav', 'm_Yawning_s.wav', 'm_ChewingPopcornManyCrunches_s.wav'}
+
+Total Number of Repeated/Added Misophonic Sounds: 8
+
+
+
+
+WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS AVERSIVE.
+
+Total Number of Classified Misophonic Sounds: 6
+
+Total Number of Missing Aversive Sounds: 4
+
+Repeated Aversive Sounds: {'m_IADS_FemaleCough_242_s.wav', 'm_IADS_Vomit_255_s.wav', 'Personalized 5', 'm_ChewingPopcornManyCrunches_s.wav'}
+
+Added Positive/Neutral Low Arousal 'Aversive' (a_) Sounds: None
+
+Total Number of Repeated/Added Misophonic Sounds: 4
+

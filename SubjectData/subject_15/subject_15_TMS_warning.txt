@@ -1,0 +1,15 @@
+WARNING! SUBJECT CLASSIFIED LESS THAN 12 UNIQUE SOUNDS AS MISOPHONIC.
+
+Total Number of Classified Misophonic Sounds: 2
+
+Total Number of Missing Misophonic Sounds: 22
+
+Added Non-Trigger High Arousal 'Misophonic' (m_) Sounds: {'m_IADS_FemaleCough_242_s.wav', 'm_ALotOfYawning_s.wav', 'm_IADS_Vomit_255_s.wav', 'm_IADS_MaleSnore_252_s.wav', 'm_iads_Whistling_270_s.wav', 'm_HotTeaSlurping_s.wav', 'm_iads_Hiccup_245_s.wav', 'm_Yawning_s.wav', 'm_FemalePanting_s.wav', 'm_ChewingPopcornManyCrunches_s.wav'}
+
+Repeated Misophonic Sounds (Repeated Once): {'m_Sniffing_s.wav', 'm_DogEatingMilkbone_s.wav'}
+
+Total Number of Repeated/Added Misophonic Sounds: 22
+
+
+
+

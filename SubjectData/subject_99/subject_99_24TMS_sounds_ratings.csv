@@ -1,0 +1,25 @@
+Subject,Category,Name,Trigger,Rating
+99,0,n_VaccuumCleaner_s.wav,Yes,0
+99,0,m_iads_Chewing_724_s.wav,Yes,1
+99,0,m_Sneeze_s.wav,Yes,2
+99,0,n_BirdsSinging_s.wav,Yes,2
+99,0,m_EatingSmallCrunches_s.wav,Yes,2
+99,0,m_DrinkingWater3_s.wav,Yes,2
+99,1,m_SoftChewing_s.wav,Yes,4
+99,1,m_HotTeaSlurping_s.wav,Yes,5
+99,1,m_FemaleSneeze_s.wav,Yes,3
+99,1,m_ChewingPopcornManyCrunches_s.wav,Yes,5
+99,1,m_SneezeReady_s.wav,Yes,3
+99,1,m_BallBouncing_s.wav,Yes,3
+99,2,m_ChewingFoodWithMouthOpen_s.wav,Yes,7
+99,2,m_SlowHardBreathing_s.wav,Yes,7
+99,2,m_HeavyBreathing2_s.wav,Yes,6
+99,2,m_FemalePanting_s.wav,Yes,6
+99,2,m_EatingSaladCutlery_s.wav,Yes,6
+99,2,m_DrinkingWater_s.wav,Yes,5
+99,3,Personalized 1,,
+99,3,Personalized 2,No,-2
+99,3,Personalized 3,No,-5
+99,3,Personalized 4,No,-5
+99,3,Personalized 5,No,-2
+99,3,Personalized 6,No,-6

@@ -1,0 +1,27 @@
+WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS MISOPHONIC.
+
+Total Number of Classified Misophonic Sounds: 6
+
+Total Number of Missing Misophonic Sounds: 4
+
+Repeated Misophonic Sounds: {'Personalized 4', 'Personalized 5', 'Personalized 6', 'Personalized 3'}
+
+Added Non-Trigger High Arousal 'Misophonic' (m_) Sounds: None
+
+Total Number of Repeated/Added Misophonic Sounds: 4
+
+
+
+
+WARNING! SUBJECT DID NOT CLASSIFY 10 UNIQUE SOUNDS AS AVERSIVE.
+
+Total Number of Classified Misophonic Sounds: 3
+
+Total Number of Missing Aversive Sounds: 7
+
+Repeated Aversive Sounds: None
+
+Added Positive/Neutral Low Arousal 'Aversive' (a_) Sounds: {'a_CarsHonking_s.wav', 'a_ChildScreaming_s.wav', 'a_FemaleScream_s.wav', 'a_Fart_s.wav', 'a_FireTruckAlarm_s.wav', 'a_CryingMan_s.wav', 'a_DangerAlarm_s.wav'}
+
+Total Number of Repeated/Added Misophonic Sounds: 7
+

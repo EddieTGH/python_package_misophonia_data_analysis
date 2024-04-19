@@ -1,0 +1,21 @@
+Name,Rating,Trigger,Ranking,Order_Label
+m_ChewingPopcornManyCrunches_s.wav,2,No,1,1
+m_IADS_FemaleCough_242_s.wav,2,No,2,3
+m_IADS_Vomit_255_s.wav,2,No,3,5
+m_IADS_FemaleCough_242_s.wav,2,No,4,8
+m_ChewingPopcornManyCrunches_s.wav,2,No,5,2
+m_IADS_Vomit_255_s.wav,2,No,6,4
+Personalized 5,4,No,7,6
+Personalized 5,4,No,8,9
+Personalized 1,5,No,9,7
+a_PuppyCrying_s.wav,8,No,10,10
+m_ALotOfYawning_s.wav,0,Yes,1,1
+m_HotTeaSlurping_s.wav,0,Yes,2,3
+m_Yawning_s.wav,0,Yes,3,5
+m_iads_Hiccup_245_s.wav,0,Yes,4,8
+m_IADS_MaleSnore_252_s.wav,0,Yes,5,2
+m_ChewingPopcornManyCrunches_s.wav,2,Yes,6,4
+m_IADS_FemaleCough_242_s.wav,2,Yes,7,6
+m_IADS_Vomit_255_s.wav,2,Yes,8,9
+m_DogEatingMilkbone_s.wav,4,Yes,9,7
+m_Sniffing_s.wav,6,Yes,10,10
