@@ -6,7 +6,7 @@ Total Number of Missing Misophonic Sounds: 5
 
 Repeated Misophonic Sounds: None
 
-Added Non-Trigger High Arousal 'Misophonic' (m_) Sounds: {'m_HeavyBreathing2_s.wav', 'm_HeavyBreathing_s.wav', 'm_SippingCoffeeCombined_s.wav', 'm_iads_Chewing_724_s.wav', 'm_ALotOfYawning_s.wav'}
+Added Non-Trigger High Arousal 'Misophonic' (m_) Sounds: {'m_HeavyBreathing2_s.wav', 'm_iads_Chewing_724_s.wav', 'm_SippingCoffeeCombined_s.wav', 'm_ALotOfYawning_s.wav', 'm_HeavyBreathing_s.wav'}
 
 Total Number of Repeated/Added Misophonic Sounds: 5
 
@@ -21,7 +21,7 @@ Total Number of Missing Aversive Sounds: 6
 
 Repeated Aversive Sounds: None
 
-Added Positive/Neutral Low Arousal 'Aversive' (a_) Sounds: {'a_ToddlerCrying_s_rev.wav', 'a_GhostWhispers_s.wav', 'a_AlarmClock_s.wav', 'a_FlyBuzzing_s.wav', 'a_FireTruckAlarm_s.wav', 'a_ScreamWithEcho_s.wav'}
+Added Positive/Neutral Low Arousal 'Aversive' (a_) Sounds: {'a_FireTruckAlarm_s.wav', 'a_FlyBuzzing_s.wav', 'a_ToddlerCrying_s_rev.wav', 'a_GhostWhispers_s.wav', 'a_ScreamWithEcho_s.wav', 'a_AlarmClock_s.wav'}
 
 Total Number of Repeated/Added Misophonic Sounds: 6
 
