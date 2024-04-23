@@ -1,10 +1,11 @@
 # Package Name
 
+Miso Data Analysis 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
-This package will analyze the raw Qualtrics data for this misophonic study.
+This package will analyze the raw Qualtrics data for the Sound Task of this Misophonia study.
 
 ## Features
 
@@ -14,15 +15,11 @@ This package will analyze the raw Qualtrics data for this misophonic study.
 
 ## Installation
 
-Provide instructions on how to install your package.
+Download this repository. In the terminal, navigate to this repository. Then run "python setup.py develop" to install this package.
 
 ## Usage
 
-Provide examples and instructions on how to use your package.
-
-## Contributing
-
-Explain how others can contribute to your project.
+In a terminal, run "run_miso" to print help and "run_miso -s 25" to process data for subject ID: 25.
 
 ## License
 
@@ -30,4 +27,4 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contact
 
-Provide your contact information for users to reach out to you.
+Email: edmond.niu@duke.edu

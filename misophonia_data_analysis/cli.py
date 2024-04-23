@@ -1,8 +1,13 @@
-r"""Title: Process Data
+r"""Title: Process Sound Task Raw Data From Qualtrics
 
 Examples
 --------
-python process_data.py -s 100123
+run_miso -s 1001
+run_miso -s 1023
+run_miso --raw-data-path ../../input_data/raw_data/miso_raw_data_9.csv -s 1001
+run_miso --mapping-data-path ../../input_data/mapping/miso_mapping_sounds_1.csv -s 1001
+run_miso --raw-data-path ../../input_data/raw_data/miso_raw_data_9.csv --mapping-data-path ../../input_data/mapping/miso_mapping_sounds_1.csv -s 1001
+
 """
 
 # %%
@@ -13,20 +18,27 @@ import textwrap
 import platform
 from datetime import datetime
 from argparse import ArgumentParser, RawTextHelpFormatter
-import SoundDataAnalysis
 
+try:
+    from misophonia_data_analysis import SoundDataAnalysis
+    import misophonia_data_analysis._version as ver
+except ImportError:
+    import SoundDataAnalysis
+    import misophonia_data_analysis._version as ver
+    
 # %%
 def _get_args():
     """Get and parse arguments."""
+    ver_info = f"\nVersion : {ver.__version__}\n\n"
     parser = ArgumentParser(
-        description=__doc__,
+        description=ver_info + __doc__,
         formatter_class=RawTextHelpFormatter,
     )
 
     parser.add_argument(
         "--raw-data-path",
         type=str,
-        default="Raw Data/miso raw data 10.csv",
+        default="../../input_data/raw_data/miso_raw_data_10.csv",
         help=textwrap.dedent(
             """\
             (default : %(default)s)
@@ -37,7 +49,7 @@ def _get_args():
     parser.add_argument(
         "--mapping-data-path",
         type=str,
-        default="Mapping/Misophonia Mapping Sounds 2.csv",
+        default="../../input_data/mapping/miso_mapping_sounds_2.csv",
         help=textwrap.dedent(
             """\
             (default : %(default)s)

@@ -1,2 +1,2 @@
 [console_scripts]
-misophonia_data_analysis = misophonia_data_analysis.cli:main
+run_miso = misophonia_data_analysis.cli:main

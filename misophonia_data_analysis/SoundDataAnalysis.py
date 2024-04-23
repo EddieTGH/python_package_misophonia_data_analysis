@@ -15,7 +15,11 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
     #3: read in mappings csv
     #mapping = pd.read_csv("Mapping/Misophonia Mapping Sounds 2.csv")
-    mapping = pd.read_csv(mapping_data_path)
+    try:
+        mapping = pd.read_csv(mapping_data_path)
+    except FileNotFoundError:
+        mapping = pd.read_csv(mapping_data_path[3:])
+
     
     mapping = mapping[['Name', 'Number']]
     mapping.columns = ['Name', 'Sound']
@@ -25,7 +29,10 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     #4: create dataframe from raw data
     # Creating the DataFrame
     #df = pd.read_csv("Raw Data/miso raw data 10.csv")
-    df = pd.read_csv(raw_data_path)
+    try:
+        df = pd.read_csv(raw_data_path)
+    except FileNotFoundError:
+        df = pd.read_csv(raw_data_path[3:])
 
 
 
@@ -253,18 +260,18 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
 
     #23: Create Warning File for MRI
-    # Name of the subdirectory to create within the current directory
-    subdirectory_name = 'SubjectData/subject_' + str(subjN)
+    # Name of the output directory to create within the current directory
+    output_directory_name = '../../output_data/subject_' + str(subjN)
     csv_paths = []
 
-    # Create the subdirectory if it doesn't exist
-    if not os.path.exists(subdirectory_name):
-        os.makedirs(subdirectory_name)
+    # Create the output directory if it doesn't exist
+    if not os.path.exists(output_directory_name):
+        os.makedirs(output_directory_name)
 
     #if warning is true
     if warning_MRI_miso_less10 or warning_MRI_aver_less10:
         #create warning text file. Populate with numDuplicates and what are the duplicates?
-        csv_file_path_warning_MRI = os.path.join(subdirectory_name, f'subject_{subjN}_MRI_warning.txt')
+        csv_file_path_warning_MRI = os.path.join(output_directory_name, f'subject_{subjN}_MRI_warning.txt')
         
         with open(csv_file_path_warning_MRI, 'w') as file:
             if warning_MRI_miso_less10:
@@ -460,7 +467,7 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     #if warning is true
     if warning_TMS_less12 or warning_TMS_less24:
         #create warning text file. Populate with numDuplicates and what are the duplicates?
-        csv_file_path_warning_TMS = os.path.join(subdirectory_name, f'subject_{subjN}_TMS_warning.txt')
+        csv_file_path_warning_TMS = os.path.join(output_directory_name, f'subject_{subjN}_TMS_warning.txt')
         
         with open(csv_file_path_warning_TMS, 'w') as file:
             if warning_TMS_less12:
@@ -497,11 +504,11 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
     #37: Save file paths
     # Define file path
-    csv_file_path_20MRI_sounds = os.path.join(subdirectory_name, f'subject_{subjN}_20MRI_sounds_names.csv')
-    csv_file_path_sound_rating_MRI = os.path.join(subdirectory_name, f'subject_{subjN}_20MRI_sounds_ratings.csv')
-    csv_file_path_24TMS_sounds = os.path.join(subdirectory_name, f'subject_{subjN}_24TMS_sounds_names.csv')
-    csv_file_path_sound_rating_TMS = os.path.join(subdirectory_name, f'subject_{subjN}_24TMS_sounds_ratings.csv')
-    csv_file_path_sound_rating_ALL = os.path.join(subdirectory_name, f'subject_{subjN}_ALL_sounds_ratings.csv')
+    csv_file_path_20MRI_sounds = os.path.join(output_directory_name, f'subject_{subjN}_20MRI_sounds_names.csv')
+    csv_file_path_sound_rating_MRI = os.path.join(output_directory_name, f'subject_{subjN}_20MRI_sounds_ratings.csv')
+    csv_file_path_24TMS_sounds = os.path.join(output_directory_name, f'subject_{subjN}_24TMS_sounds_names.csv')
+    csv_file_path_sound_rating_TMS = os.path.join(output_directory_name, f'subject_{subjN}_24TMS_sounds_ratings.csv')
+    csv_file_path_sound_rating_ALL = os.path.join(output_directory_name, f'subject_{subjN}_ALL_sounds_ratings.csv')
 
 
     # Save the Sound column to CSV

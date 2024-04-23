@@ -10,5 +10,3 @@ misophonia_data_analysis.egg-info/dependency_links.txt
 misophonia_data_analysis.egg-info/entry_points.txt
 misophonia_data_analysis.egg-info/requires.txt
 misophonia_data_analysis.egg-info/top_level.txt
-misophonia_data_analysis/Mapping/__init__.py
-misophonia_data_analysis/Raw Data/__init__.py

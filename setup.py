@@ -8,7 +8,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "misophonia_data_analysis=misophonia_data_analysis.cli:main",
+            "run_miso=misophonia_data_analysis.cli:main",
         ]
     },
     install_requires=[
