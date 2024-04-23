@@ -96,16 +96,15 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
     #check if all columns exist
     if 'Rating' not in df_final.columns:
-        print("Subject did not rate any sounds in the Sound Task Form. Have them retake the form or remove them from the study.")
+        print("Subject did not rate any sounds in the Sound Task Form. Sound stimuli unable to be generated. Have them retake the form or remove them from the study.")
         return
     if 'Trigger' not in df_final.columns:
         df_final['Trigger'] = np.nan
-        print("Subject did not rate any sounds in the Sound Task Form as misophonic or aversive.")
+        print("Subject did not rate any sounds in the Sound Task Form as misophonic or aversive. Sound stimuli unable to be generated. Have them retake the form or remove them from the study.")
         return
     if 'Memory' not in df_final.columns:
         df_final['Memory'] = np.nan
         print("Subject did not rate any sounds in the Sound Task Form as positive or neutral.")  
-        return
 
     df_final = df_final[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Memory', 'Order']]
     df_final = df_final[df_final['Rating'].notna()]
