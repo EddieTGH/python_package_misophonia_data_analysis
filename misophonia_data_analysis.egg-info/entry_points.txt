@@ -1,0 +1,2 @@
+[console_scripts]
+run_miso = misophonia_data_analysis.cli:main
