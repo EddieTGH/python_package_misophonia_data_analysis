@@ -1,5 +1,6 @@
 #1: import packages
 import pandas as pd
+import numpy as np
 import os
 import random
 import warnings
@@ -44,9 +45,10 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
         print("\n")
         print("Error: Subject Number: " + str(subjN) + " not found!")
         print("\n")
+        return
     else:
         print("\n")
-        print("Subject Number: " + str(subjN) + " found!")
+        print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
 
@@ -92,7 +94,64 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     #merge mapping + df_final
     df_final = pd.merge(df_final, mapping, on="Sound")
 
+    #check if all columns exist
+    if 'Rating' not in df_final.columns:
+        print("Subject did not rate any sounds in the Sound Task Form. Have them retake the form or remove them from the study.")
+        return
+    if 'Trigger' not in df_final.columns:
+        df_final['Trigger'] = np.nan
+        print("Subject did not rate any sounds in the Sound Task Form as misophonic or aversive.")
+        return
+    if 'Memory' not in df_final.columns:
+        df_final['Memory'] = np.nan
+        print("Subject did not rate any sounds in the Sound Task Form as positive or neutral.")  
+        return
+
     df_final = df_final[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Memory', 'Order']]
+    df_final = df_final[df_final['Rating'].notna()]
+
+
+
+
+
+    #23: Create Warning File for MRI
+    # Name of the output directory to create within the current directory
+
+    #check which directory i'm in:
+    if os.path.exists('misophonia_data_analysis'):
+        output_directory_name = '../output_data/subject_' + str(subjN)
+    else:
+        output_directory_name = '../../output_data/subject_' + str(subjN)
+
+    csv_paths = []
+
+    # Create the output directory if it doesn't exist
+    if not os.path.exists(output_directory_name):
+        os.makedirs(output_directory_name)
+
+    
+    warning_NotComplete = False
+    sounds_rated = df_final.shape[0]
+
+    if sounds_rated < 106:
+        warning_NotComplete = True
+
+
+    #if warning is true
+    if warning_NotComplete:
+        csv_file_path_warning_NotComplete = os.path.join(output_directory_name, f'subject_{subjN}_Form_Not_Complete.txt')
+        
+        with open(csv_file_path_warning_NotComplete, 'w') as file:
+            file.write("WARNING! SUBJECT DID NOT COMPLETE SOUND TASK FORM." + "\n\n" + 
+                    "Total Number of Sounds Rated: " +  str(sounds_rated) + "\n\n" +
+                    "Total Number of Sounds Not Rated: " + str(106-sounds_rated))
+            
+        print(f"File saved to {csv_file_path_warning_NotComplete}")
+        csv_paths.append(csv_file_path_warning_NotComplete)
+    
+
+
+
 
 
 
@@ -124,6 +183,21 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     df_miso_aversive['Rating'] = df_miso_aversive['Rating'].astype(int)
     #abs value of ratings
     df_miso_aversive['Rating'] = df_miso_aversive['Rating'].abs()
+
+
+    df_miso = df_miso_aversive[df_miso_aversive['Trigger'] == 'Yes'].reset_index(drop=True)
+    numMiso = df_miso.shape[0]
+    if numMiso == 0:
+        print("Subject did not rate any sounds as misophonic sounds. No stimuli files can be generated.")
+        return
+
+    df_aversive = df_miso_aversive[df_miso_aversive['Trigger'] == 'No'].reset_index(drop=True)
+    numAver = df_miso.shape[0]
+    if numAver == 0:
+        print("Subject did not rate any sounds as aversive sounds. No stimuli files can be generated.")
+        return
+
+
 
 
 
@@ -180,15 +254,28 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
         #print(aversive_posNeut_Ratings)
         aversive_posNeut_Ratings = aversive_posNeut_Ratings.head(warning_MRI_numRepeats_miso)
 
-        #Coerce
-        aversive_posNeut_Ratings['Trigger'] = 'Yes'
-        aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].astype(int)
-        aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].abs()
-
-        warning_MRI_miso_sounds_added = set(aversive_posNeut_Ratings['Name']) #which miso sounds added
-        warning_MRI_num_miso_sounds_ADD_REPEAT = len(aversive_posNeut_Ratings) #num miso sound added 
+        #if not enough sounds
+        numExtraSounds = aversive_posNeut_Ratings.shape[0]
         
-        df_miso_10 = pd.concat([df_miso_10, aversive_posNeut_Ratings], ignore_index=True)
+        if numExtraSounds < warning_MRI_numRepeats_miso:
+            DUPLICATES_MISO = df_miso_10.sample(n=warning_MRI_numRepeats_miso, replace=True)
+
+            warning_MRI_miso_sounds_repeated = set(DUPLICATES_MISO['Name']) #which miso sounds added
+            warning_MRI_num_miso_sounds_ADD_REPEAT = len(DUPLICATES_MISO) #num miso sound added 
+            
+            df_miso_10 = pd.concat([df_miso_10, DUPLICATES_MISO], ignore_index=True)
+            
+        else:
+            #Coerce
+            aversive_posNeut_Ratings['Trigger'] = 'Yes'
+            aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].astype(int)
+            aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].abs()
+        
+            warning_MRI_miso_sounds_added = set(aversive_posNeut_Ratings['Name']) #which miso sounds added
+            warning_MRI_num_miso_sounds_ADD_REPEAT = len(aversive_posNeut_Ratings) #num miso sound added 
+            
+            df_miso_10 = pd.concat([df_miso_10, aversive_posNeut_Ratings], ignore_index=True)
+
 
     if (warning_MRI_numRows__miso > 5) and (warning_MRI_numRows__miso < 10):
         warning_MRI_miso_less10 = True
@@ -236,13 +323,25 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
         posNeutRatings['Rating'] = posNeutRatings['Rating'].astype(int)
         posNeutRatings = posNeutRatings.sort_values(by=['Rating'], ascending=True).head(warning_MRI_numRepeats_aver)
         
-        #Coerce
-        posNeutRatings['Trigger'] = 'No'
-
-        warning_MRI_aver_sounds_added = set(posNeutRatings['Name']) #which aver sounds added
-        warning_MRI_num_aver_sounds_ADD_REPEAT = len(warning_MRI_aver_sounds_added) #num aver sound added 
+        #if not enough sounds
+        numExtraSounds = posNeutRatings.shape[0]
         
-        df_aversive_10 = pd.concat([df_aversive_10, posNeutRatings], ignore_index=True)
+        if numExtraSounds < warning_MRI_numRepeats_aver:
+            DUPLICATES_AVER = df_aversive_10.sample(n=warning_MRI_numRepeats_aver, replace=True)
+
+            warning_MRI_aver_sounds_repeated = set(DUPLICATES_AVER['Name']) #which miso sounds added
+            warning_MRI_num_aver_sounds_ADD_REPEAT = len(DUPLICATES_AVER) #num miso sound added 
+            
+            df_aversive_10 = pd.concat([df_aversive_10, DUPLICATES_AVER], ignore_index=True)
+        
+        else:
+            #Coerce
+            posNeutRatings['Trigger'] = 'No'
+        
+            warning_MRI_aver_sounds_added = set(posNeutRatings['Name']) #which aver sounds added
+            warning_MRI_num_aver_sounds_ADD_REPEAT = len(warning_MRI_aver_sounds_added) #num aver sound added 
+            
+            df_aversive_10 = pd.concat([df_aversive_10, posNeutRatings], ignore_index=True)
 
 
     if (warning_MRI_numRows__aversive > 5) and (warning_MRI_numRows__aversive < 10):
@@ -259,14 +358,6 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
 
 
-    #23: Create Warning File for MRI
-    # Name of the output directory to create within the current directory
-    output_directory_name = '../../output_data/subject_' + str(subjN)
-    csv_paths = []
-
-    # Create the output directory if it doesn't exist
-    if not os.path.exists(output_directory_name):
-        os.makedirs(output_directory_name)
 
     #if warning is true
     if warning_MRI_miso_less10 or warning_MRI_aver_less10:
@@ -365,6 +456,8 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     warning_TMS_less24 = False
 
     numMiso = df_miso.shape[0]
+    num_Mprefix_needed = 0
+    warning_Miso_added = "None"
 
     num_Mprefix_needed = 0
 
@@ -396,17 +489,24 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
         aversive_posNeut_Ratings = aversive_posNeut_Ratings.head(num_Mprefix_needed)
         #print(aversive_posNeut_Ratings)
 
-        #Coerce
-        aversive_posNeut_Ratings['Trigger'] = 'Yes'
-        aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].astype(int)
-        aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].abs()
-        #print(aversive_posNeut_Ratings)
+        #if not enough sounds
+        numExtraSounds = aversive_posNeut_Ratings.shape[0]
+        if numExtraSounds < num_Mprefix_needed:
+            DUPLICATES_MISO = df_miso_10.sample(n=num_Mprefix_needed, replace=True)
+            df_tms_ratings = pd.concat([df_miso, DUPLICATES_MISO], ignore_index=True)
+        
+        else:
+            #Coerce
+            aversive_posNeut_Ratings['Trigger'] = 'Yes'
+            aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].astype(int)
+            aversive_posNeut_Ratings['Rating'] = aversive_posNeut_Ratings['Rating'].abs()
+            #print(aversive_posNeut_Ratings)
+        
+            warning_Miso_added = set(aversive_posNeut_Ratings['Name'])
+        
+            df_tms_ratings = pd.concat([df_miso, aversive_posNeut_Ratings], ignore_index=True)
 
-        warning_Miso_added = set(aversive_posNeut_Ratings['Name'])
-
-        df_tms_ratings = pd.concat([df_miso, aversive_posNeut_Ratings], ignore_index=True)
-
-        warning_Miso_repeated = set(df_miso['Name'])
+        warning_Miso_repeated = set(df_tms_ratings['Name'])
         
         df_tms_ratings_copy = df_tms_ratings.copy()
         df_tms_ratings = pd.concat([df_tms_ratings, df_tms_ratings_copy], ignore_index=True)

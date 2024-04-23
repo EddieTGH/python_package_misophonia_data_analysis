@@ -38,7 +38,7 @@ def _get_args():
     parser.add_argument(
         "--raw-data-path",
         type=str,
-        default="../../input_data/raw_data/miso_raw_data_10.csv",
+        default="../../input_data/raw_data/miso_raw_data_13.csv",
         help=textwrap.dedent(
             """\
             (default : %(default)s)
