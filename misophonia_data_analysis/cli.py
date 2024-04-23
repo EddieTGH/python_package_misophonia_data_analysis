@@ -24,7 +24,7 @@ try:
     import misophonia_data_analysis._version as ver
 except ImportError:
     import SoundDataAnalysis
-    import misophonia_data_analysis._version as ver
+    import _version as ver
     
 # %%
 def _get_args():
