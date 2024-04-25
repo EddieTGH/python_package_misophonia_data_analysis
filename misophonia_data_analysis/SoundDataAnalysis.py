@@ -22,8 +22,7 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
         mapping = pd.read_csv(mapping_data_path[3:])
 
     
-    mapping = mapping[['Name', 'Number']]
-    mapping.columns = ['Name', 'Sound']
+    mapping.columns = ['ID', 'Name', 'Sound']
 
 
 
@@ -598,6 +597,90 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
     print("TMS Sound Names: \n")
     print(df_tms_sound_names)
     print("\n\n")
+
+
+
+
+
+    #Follow up Task
+    #create miso sounds table not in stimuli
+    miso_not_in_mri = pd.concat([df_miso, df_miso_10, df_miso_10]).drop_duplicates(keep=False)
+    #print(miso_not_in_mri)
+
+    mod_df_tms_ratings = df_tms_ratings[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Order']]
+    miso_not_in_mri_tms = pd.concat([miso_not_in_mri, mod_df_tms_ratings, mod_df_tms_ratings]).drop_duplicates(keep=False)
+    #print(miso_not_in_mri_tms)
+
+    try: 
+        subset_miso_not_in_mri_tms = miso_not_in_mri_tms.sample(n=4)
+    except:
+        subset_miso_not_in_mri_tms = miso_not_in_mri_tms.head(4)
+
+
+    #generate UNIQUE total stimuli list (24+10-duplicates)
+    total_stim = pd.concat([df_aversive_10['Name'], df_tms_sound_names]).reset_index(drop=True)
+    total_stim = pd.concat([total_stim, subset_miso_not_in_mri_tms['Name']]).reset_index(drop=True)
+    total_stim_set = set(total_stim)
+    total_stim_list_unique = list(total_stim_set)
+    #print(total_stim_list_unique)
+    total_stim_unique = pd.DataFrame(total_stim_list_unique, columns=['Name'])
+
+
+    #Fill up extra spaces with neutral/positive sounds
+    total_received = total_stim_unique.shape[0]
+    total_needed = 38 - total_received
+
+    #add neutral sounds
+    #get rid of all NaN values in Memory column (get rid of aver/miso sounds)
+    df_pos_neut = df_final.dropna(subset=['Memory'])
+
+    try:
+        subset_df_pos_neut = df_pos_neut.sample(n=total_needed)
+    except:
+        subset_df_pos_neut = df_pos_neut.head(total_needed)
+
+    #add neutral/positive sounds
+    final_followup_stim = pd.concat([total_stim_unique['Name'], subset_df_pos_neut['Name']]).reset_index(drop=True)
+    
+    #randomize the rows
+    final_followup_stim = final_followup_stim.sample(frac=1).reset_index(drop=True)
+
+    print("Follow Up Stimuli: \n")
+    print(final_followup_stim)
+    print("\n\n")
+
+
+    #Map these names to their unique IDs
+    # Create a dictionary from 'mapping' DataFrame where 'Name' is the key and 'ID' is the value
+    name_to_id = dict(zip(mapping['Name'], mapping['ID']))
+
+    # Map the 'names' Series to get the corresponding 'ID' values
+    matched_ids = final_followup_stim.map(name_to_id)
+
+    # Convert the Series to a list
+    ids_list = matched_ids.tolist()
+    #print(ids_list)
+
+    # Join the list into a string with comma-separated values
+    csv_followup_stim_ids = ','.join(ids_list)
+
+    print("Follow Up Stimuli Sound IDs List: \n")
+    print(csv_followup_stim_ids)
+    print("\n\n")
+
+    #save txtfile
+    csv_file_path_follow_up_stim = os.path.join(output_directory_name, f'subject_{subjN}_Follow_Up_Stimuli.txt')
+        
+    with open(csv_file_path_follow_up_stim, 'w') as file:
+        file.write(csv_followup_stim_ids)
+        
+    csv_paths.append(csv_file_path_follow_up_stim)
+    print(f"File saved to {csv_file_path_follow_up_stim}")
+    print("\n")
+
+
+
+
 
 
 
