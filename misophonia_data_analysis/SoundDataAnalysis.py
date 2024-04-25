@@ -58,7 +58,12 @@ def proc_data(subjN, raw_data_path, mapping_data_path):
 
     #remove uneccessary columns
     columns_list = df.columns.tolist()
+    #V1
     columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    
+    #V2
+    #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'txtFile3', 'txtFile4', 'txtFile5', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    
     df = df.drop(columns=columns_to_remove)
 
 
