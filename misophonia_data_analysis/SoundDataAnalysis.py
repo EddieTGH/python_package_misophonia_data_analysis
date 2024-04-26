@@ -116,18 +116,28 @@ def proc_intake(subjN, raw_data_path, mapping_data_path):
 
     #warnings and CSVs for MRI
     task_mri_task_cues = "/mnt/munin/Neacsiu/MISOSTIM.01/Data/task_mri/task_cues/subject_" + str(subjN)
+    if not os.path.exists(task_mri_task_cues):
+        os.makedirs(task_mri_task_cues)
 
     #warning and CVS for TMS
     task_tms_task_cues = "/mnt/munin/Neacsiu/MISOSTIM.01/Data/task_tms/task_cues/subject_" + str(subjN)
+    if not os.path.exists(task_tms_task_cues):
+        os.makedirs(task_tms_task_cues)
 
     #qualtrics stimuli txt file for follow up
     task_qualtrics_stimuli = "/mnt/munin/Neacsiu/MISOSTIM.01/Data/task_sound/qualtrics_fu_stimuli"
+    if not os.path.exists(task_qualtrics_stimuli):
+        os.makedirs(task_qualtrics_stimuli)
 
     #sound ratings directory (all sound ratings, fu1, and fu2 full ratings)
     full_sound_ratings = "/mnt/munin/Neacsiu/MISOSTIM.01/Data/task_sound/derivatives/sound_ratings/subject_" + str(subjN)
+    if not os.path.exists(full_sound_ratings):
+        os.makedirs(full_sound_ratings)
 
     #qualtrics fu mapping sounds
     qualtrics_fu_mapping = "/mnt/munin/Neacsiu/MISOSTIM.01/Data/task_sound/mapping_fu"
+    if not os.path.exists(qualtrics_fu_mapping):
+        os.makedirs(qualtrics_fu_mapping)
 
 
 
