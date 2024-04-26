@@ -654,6 +654,17 @@ def proc_data(subjN, raw_data_path, mapping_data_path, type_processing):
         #add neutral/positive sounds
         final_followup_stim = pd.concat([total_stim_unique['Name'], subset_df_pos_neut['Name']]).reset_index(drop=True)
         
+        #if still not enough sounds
+        numStillNeeded = 38 - final_followup_stim.shape[0]
+        if numStillNeeded > 0:
+            addMore = final_followup_stim.sample(n=numStillNeeded)
+            final_followup_stim = pd.concat([final_followup_stim, addMore]).reset_index(drop=True)
+
+        #if still not enough
+        if final_followup_stim.shape[0] < 38:
+            print("Error: Not enough sounds to generate follow up stimuli. Have the subject rate more sounds.")
+            return
+
         #randomize the rows
         final_followup_stim = final_followup_stim.sample(frac=1).reset_index(drop=True)
 
