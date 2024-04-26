@@ -61,10 +61,10 @@ def proc_data(subjN, raw_data_path, mapping_data_path, type_processing):
         #remove uneccessary columns
         columns_list = df.columns.tolist()
         #V1
-        columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+        #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
         
         #V2
-        #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'txtFile3', 'txtFile4', 'txtFile5', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+        columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'txtFile3', 'txtFile4', 'txtFile5', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
         
         df = df.drop(columns=columns_to_remove)
 
@@ -552,6 +552,11 @@ def proc_data(subjN, raw_data_path, mapping_data_path, type_processing):
             #create 6 personalized, and then choose 6 top and 6 bottom from nonpersonalized
             #change this
             df_miso_personalized = df_final[df_final['Sound'] <= 6]
+            df_miso_personalized['Trigger'] = 'Yes'
+            df_miso_personalized['Rating'] = df_miso_personalized['Rating'].astype(int)
+            df_miso_personalized['Rating'] = df_miso_personalized['Rating'].abs()
+            num_extra_needed = 6-(df_miso_personalized.shape[0])
+
             #df_miso_personalized = df_miso[df_miso['Sound'] <= 6]
             
             df_miso_noPersonalized = df_miso[df_miso['Sound'] > 6]
@@ -561,7 +566,7 @@ def proc_data(subjN, raw_data_path, mapping_data_path, type_processing):
             #Get rid of top 6 and bottom 6 sounds to pull random sounds for middle 6
             NP_Or6Highest = pd.concat([df_miso_noPersonalized, df_miso_NP_6Highest, df_miso_NP_6Highest]).drop_duplicates(keep=False)
             NP_Or6Highest_Or6Lowest = pd.concat([NP_Or6Highest, df_miso_NP_6Lowest, df_miso_NP_6Lowest]).drop_duplicates(keep=False)
-            df_miso_NP_6Middle = NP_Or6Highest_Or6Lowest.sample(n=6)
+            df_miso_NP_6Middle = NP_Or6Highest_Or6Lowest.sample(n=(6+num_extra_needed))
             
             #concat all together
             df_tms_ratings = pd.concat([df_miso_NP_6Lowest, df_miso_NP_6Middle, df_miso_NP_6Highest, df_miso_personalized], ignore_index=True)
@@ -896,5 +901,5 @@ def proc_data(subjN, raw_data_path, mapping_data_path, type_processing):
         csv_paths.append(csv_file_path_follow_up_ratings)
         print(f"File saved to {csv_file_path_follow_up_ratings}")
         print("\n")
-        
+
         print("Post Processing of Follow Up Task Completed: Success!\n")
