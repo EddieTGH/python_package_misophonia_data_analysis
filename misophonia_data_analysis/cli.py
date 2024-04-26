@@ -21,7 +21,7 @@ Utilize this script to process raw data from intake and follow up sound tasks...
 1. Ensure that intake data analysis has already been run (output files generated).
 - This should ensure that the mapping data file is available for the follow up data analysis
 - The mapping data file should be found in the 'data/task_sound/mapping_fu' folder
-- The mapping data file should be named as 'subject_{subjN}_follow_up_mapping.csv'
+- The mapping data file should be named as 'mapping_fu_{subjN}.csv'
 
 2. Ensure that the Qualtrics fu raw data file is in the correct location:
 - The Qualtrics fu raw data file should be named as 'raw_qualtrics_fu_1-month_{subjN}.csv'
@@ -33,7 +33,7 @@ Utilize this script to process raw data from intake and follow up sound tasks...
 1. Ensure that intake data analysis has already been run (output files generated).
 - This should ensure that the mapping data file is available for the follow up data analysis
 - The mapping data file should be found in the 'data/task_sound/mapping_fu' folder
-- The mapping data file should be named as 'subject_{subjN}_follow_up_mapping.csv'
+- The mapping data file should be named as 'mapping_fu_{subjN}.csv'
 
 2. Ensure that the Qualtrics fu raw data file is in the correct location:
 - The Qualtrics fu raw data file should be named as 'raw_qualtrics_fu_3-month_{subjN}.csv'
@@ -45,8 +45,8 @@ python cli.py -s 1001 -t intake
 python cli.py -s 1001 -t fu_1month
 python cli.py -s 1001 -t fu_3month
 python cli.py -s 1023 -t intake
-python cli.py -s 1001 -t fu_1month
-python cli.py -s 1001 -t fu_3month
+python cli.py -s 1023 -t fu_1month
+python cli.py -s 1023 -t fu_3month
 
 """
 
