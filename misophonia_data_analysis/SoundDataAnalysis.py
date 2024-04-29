@@ -705,7 +705,9 @@ def proc_intake(subjN, raw_data_path, mapping_data_path):
     #if still not enough sounds
     numStillNeeded = 38 - final_followup_stim.shape[0]
     if numStillNeeded > 0:
-        addMore = final_followup_stim.sample(n=numStillNeeded)
+        print("numstillneeded: " + str(numStillNeeded))
+        print("num rows of final follow up stim: " + str(final_followup_stim.shape[0]))
+        addMore = final_followup_stim.sample(n=numStillNeeded, replace=True)
         final_followup_stim = pd.concat([final_followup_stim, addMore]).reset_index(drop=True)
 
     #if still not enough
@@ -1047,7 +1049,7 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
     date = date[:10]
-    
+
     #Select correct follow up (1 month or 3 month)
     df = df[df['num_follow_up'] == '3 Month']
     if df.shape[0] == 0:
