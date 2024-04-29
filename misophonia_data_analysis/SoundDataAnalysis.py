@@ -81,13 +81,14 @@ def proc_intake(subjN, raw_data_path, mapping_data_path):
 
 
 
-    #9: Pivoting the table to get the correct format
-    df_pivoted = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
-
+    #9: Pivoting the table to get the correct format    
+    df_melted.fillna({'Value': ""}, inplace=True)
+    df_pivoted_with_NAs = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
+    df_pivoted_without_NAs = df_pivoted_with_NAs[df_pivoted_with_NAs['Rating'] != ""]
 
 
     #10: Renaming columns for clarity and additional cleaning
-    df_final = df_pivoted.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
+    df_final = df_pivoted_without_NAs.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
     df_final['Sound'] = df_final['Sound'].astype(int)  # Converting Sound to numeric for proper sorting
 
     df_final = df_final.sort_values(by=['Sound']).reset_index(drop=True)
@@ -202,7 +203,21 @@ def proc_intake(subjN, raw_data_path, mapping_data_path):
 
 
     #13: Create sound_rating_all: Sound Rating Table for ALL sounds AND print
-    sound_rating_all = df_final[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Memory', 'Order']]
+    # Renaming columns for clarity
+    df_final_all = df_pivoted_with_NAs.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
+    df_final_all['Sound'] = df_final_all['Sound'].astype(int)  # Converting Sound to numeric for proper sorting
+
+    df_final_all = df_final_all.sort_values(by=['Sound']).reset_index(drop=True)
+    #fix qualtrics bug
+    df_final_all.loc[df_final_all['Sound'] > 56, 'Sound'] -= 3
+
+    #merge mapping + df_final
+    df_final_all = pd.merge(df_final_all, mapping, on="Sound")    
+
+    df_final_all = df_final_all[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Memory', 'Order']]
+
+
+    sound_rating_all = df_final_all[['Subject', 'Sound', 'Name', 'Rating', 'Trigger', 'Memory', 'Order']]
     sound_rating_all['Date'] = date
 
     sound_rating_all = sound_rating_all[['Subject', 'Date', 'Order', 'Name', 'Rating', 'Trigger', 'Memory']]
@@ -834,7 +849,13 @@ def proc_fu_1month(subjN, raw_data_path, mapping_data_path):
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
+    #Make sure to select 3_month raw_data (later end_date)
+    df['EndDate'] = pd.to_datetime(df['EndDate'])
+    df['EndDate']
 
+    # Sort by 'startdate' and keep the last row
+    df = df.sort_values('EndDate', ascending=True)
+    df = df.head(1)
 
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
@@ -867,13 +888,14 @@ def proc_fu_1month(subjN, raw_data_path, mapping_data_path):
 
 
 
-    #9: Pivoting the table to get the correct format
-    df_pivoted = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
-
+    #9: Pivoting the table to get the correct format    
+    df_melted.fillna({'Value': ""}, inplace=True)
+    df_pivoted_with_NAs = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
+    df_pivoted_without_NAs = df_pivoted_with_NAs[df_pivoted_with_NAs['Rating'] != ""]
 
 
     #10: Renaming columns for clarity and additional cleaning
-    df_final = df_pivoted.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
+    df_final = df_pivoted_with_NAs.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
     df_final['Sound'] = df_final['Sound'].astype(int)  # Converting Sound to numeric for proper sorting
 
     df_final = df_final.sort_values(by=['Sound']).reset_index(drop=True)
@@ -1021,7 +1043,13 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
+    #Make sure to select 3_month raw_data (later end_date)
+    df['EndDate'] = pd.to_datetime(df['EndDate'])
+    df['EndDate']
 
+    # Sort by 'startdate' and keep the last row
+    df = df.sort_values('EndDate', ascending=True)
+    df = df.tail(1)
 
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
@@ -1055,12 +1083,13 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
 
 
     #9: Pivoting the table to get the correct format
-    df_pivoted = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
-
+    df_melted.fillna({'Value': ""}, inplace=True)
+    df_pivoted_with_NAs = df_melted.pivot_table(index=['Subject Number', 'Sound'], columns='Type', values='Value', aggfunc='first').reset_index()
+    df_pivoted_without_NAs = df_pivoted_with_NAs[df_pivoted_with_NAs['Rating'] != ""]
 
 
     #10: Renaming columns for clarity and additional cleaning
-    df_final = df_pivoted.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
+    df_final = df_pivoted_with_NAs.rename(columns={"Subject Number": "Subject", "Rating": "Rating", "Trigger": "Trigger"})
     df_final['Sound'] = df_final['Sound'].astype(int)  # Converting Sound to numeric for proper sorting
 
     df_final = df_final.sort_values(by=['Sound']).reset_index(drop=True)
