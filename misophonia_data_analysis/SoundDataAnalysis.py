@@ -849,17 +849,16 @@ def proc_fu_1month(subjN, raw_data_path, mapping_data_path):
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
-    #Make sure to select 3_month raw_data (later end_date)
-    df['EndDate'] = pd.to_datetime(df['EndDate'])
-    df['EndDate']
-
-    # Sort by 'startdate' and keep the last row
-    df = df.sort_values('EndDate', ascending=True)
-    df = df.head(1)
 
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
     date = date[:10]
+
+    #Select correct follow up (1 month or 3 month)
+    df = df[df['num_follow_up'] == '1 Month']
+    if df.shape[0] == 0:
+        print("Error: 1 Month Follow-up for Subject Number: " + str(subjN) + " not found!")
+        return
 
     #remove uneccessary columns
     columns_list = df.columns.tolist()
@@ -868,7 +867,9 @@ def proc_fu_1month(subjN, raw_data_path, mapping_data_path):
     #V2
     #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'txtFile3', 'txtFile4', 'txtFile5', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
     #V3
-    columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    #V4
+    columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop', 'num_follow_up']
 
     df = df.drop(columns=columns_to_remove)
 
@@ -1043,17 +1044,15 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
-    #Make sure to select 3_month raw_data (later end_date)
-    df['EndDate'] = pd.to_datetime(df['EndDate'])
-    df['EndDate']
-
-    # Sort by 'startdate' and keep the last row
-    df = df.sort_values('EndDate', ascending=True)
-    df = df.tail(1)
-
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
     date = date[:10]
+    
+    #Select correct follow up (1 month or 3 month)
+    df = df[df['num_follow_up'] == '3 Month']
+    if df.shape[0] == 0:
+        print("Error: 3 Month Follow-up for Subject Number: " + str(subjN) + " not found!")
+        return
 
     #remove uneccessary columns
     columns_list = df.columns.tolist()
@@ -1062,7 +1061,9 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
     #V2
     #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'txtFile3', 'txtFile4', 'txtFile5', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
     #V3
-    columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    #columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop']
+    #V4
+    columns_to_remove = ['StartDate', 'EndDate', 'Status', 'IPAddress', 'Progress', 'Duration (in seconds)', 'Finished', 'RecordedDate', 'ResponseId', 'RecipientLastName', 'RecipientFirstName', 'RecipientEmail', 'ExternalReference', 'LocationLatitude', 'LocationLongitude', 'DistributionChannel', 'UserLanguage', 'Browser Type_Browser', 'Browser Type_Version', 'Browser Type_Operating System', 'Browser Type_Resolution', 'sounds', 'txtFile1', 'txtFile2', 'subject_numbers', 'foundSubject', 'Order', 'EndLoop', 'num_follow_up']
 
     df = df.drop(columns=columns_to_remove)
 
