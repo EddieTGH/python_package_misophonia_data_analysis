@@ -49,7 +49,11 @@ def proc_intake(subjN, raw_data_path, mapping_data_path):
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
 
-
+    # if multiple entries for this subject ID, keep the most recent entry
+    #there shouldn't be multiple but in the case that there is
+    df['EndDate'] = pd.to_datetime(df['EndDate'])
+    df = df.sort_values('EndDate', ascending=True)
+    df = df.tail(1)
 
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
@@ -852,6 +856,13 @@ def proc_fu_1month(subjN, raw_data_path, mapping_data_path):
         print("\n")
 
 
+    # if multiple entries for this subject ID, keep the most recent entry
+    #there shouldn't be multiple but in the case that there is
+    df['EndDate'] = pd.to_datetime(df['EndDate'])
+    df = df.sort_values('EndDate', ascending=True)
+    df = df.tail(1)
+
+    
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
     date = date[:10]
@@ -1045,6 +1056,13 @@ def proc_fu_3month(subjN, raw_data_path, mapping_data_path):
         print("\n")
         print("Subject Number: " + str(subjN) + " found!!")
         print("\n")
+
+
+    # if multiple entries for this subject ID, keep the most recent entry
+    #there shouldn't be multiple but in the case that there is
+    df['EndDate'] = pd.to_datetime(df['EndDate'])
+    df = df.sort_values('EndDate', ascending=True)
+    df = df.tail(1)
 
     #6: get date and remove uneccessary columns
     date = df['StartDate'].iloc[0]
