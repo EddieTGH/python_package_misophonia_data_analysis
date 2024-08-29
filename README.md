@@ -1,6 +1,4 @@
-# Package Name
-
-Misophonia Subject Data Analysis and Experiment Configuration Setup
+# Misophonia Subject Data Analysis and Experiment Configuration Setup
 
 ## Description
 
