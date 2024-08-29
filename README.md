@@ -1,17 +1,17 @@
 # Package Name
 
-Miso Data Analysis 
+Misophonia Subject Data Analysis and Experiment Configuration Setup 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
-This package will analyze the raw Qualtrics data for the Sound Task of this Misophonia study.
+This is a Python package with a custom-built command line interface (CLI) that conducts data wrangling on subject intake data in large Qualtrics datasets to setup experiment configuration (MRI sounds and TMS sounds) for each subject by cleaning data and analyzing subject data through Python, pandas, and Jupyter Notebook.
 
 ## Features
 
-- Analyze raw Qualtrics data
-- Create and output sound rating csv files
-- Output 20 mri sounds and 24 tms sounds
+- Analyze raw Qualtrics data for each subject
+- Create and output sound rating csv files for each subject
+- Configure experiment setup: output 20 mri sounds and 24 tms sounds personalized to each subject
 
 ## Installation
 
@@ -27,4 +27,4 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Contact
 
-Email: edmond.niu@duke.edu
+Email: edmond.niu@gmail.com
